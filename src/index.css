@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --ibm-blue:   #4589ff;
+  --ibm-green:  #42be65;
+  --ibm-purple: #a56eff;
+  --bg-page:    #1a1a2e;
+  --bg-header:  #12122a;
+  --bg-card:    #1e1e3a;
+  --bg-deep:    #13132a;
+  --border:     #2d2d52;
+  --border-dim: #1e1e38;
+  --text-muted: #5a6a8a;
+  --text-dim:   #3a4a6a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg-page);
+  font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { min-height: 100vh; }
+
+/* ── Animations ── */
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.06); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bar-grow {
+  from { width: 0%; }
+}
+@keyframes collapse-flash {
+  0%   { box-shadow: 0 0 0 0   rgba(69,137,255,.7); }
+  60%  { box-shadow: 0 0 0 14px rgba(69,137,255,0); }
+  100% { box-shadow: 0 0 0 0   rgba(69,137,255,0); }
+}
+@keyframes welcome-glow {
+  0%,100% { opacity: .4; }
+  50%      { opacity: .8; }
+}
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
+
+.pulse-ring    { animation: pulse-ring 2.4s ease-in-out infinite; }
+.spin-slow     { animation: spin-slow  7s linear infinite; }
+.fade-in       { animation: fade-in   .35s ease-out; }
+.fade-up       { animation: fade-up   .5s  ease-out both; }
+.bar-animated  { animation: bar-grow  .5s  ease-out; }
+.collapse-flash{ animation: collapse-flash .7s ease-out; }
+.welcome-glow  { animation: welcome-glow 3s ease-in-out infinite; }
+
+/* ── Scrollbar (thin, dark) ── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── Range input ── */
+input[type=range] { accent-color: var(--ibm-blue); }
+
+/* ── Responsive table ── */
+@media (max-width: 640px) {
+  .resp-table td, .resp-table th { padding: 8px 10px; font-size: 11px; }
+}
