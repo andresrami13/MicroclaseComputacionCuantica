@@ -141,19 +141,18 @@ function Bar({ label, count, total, animFlash }) {
   const [d1, d0] = label.split('')  // d1=q[1] digit, d0=q[0] digit
 
   return (
-    <div className="flex flex-col items-center gap-1 flex-1">
-      <span className={`text-xs font-mono font-bold ${active ? 'text-white' : 'text-[#2a3a5a]'}`}>
+    <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
+      <span className={`text-[10px] sm:text-xs font-mono font-bold ${active ? 'text-white' : 'text-[#2a3a5a]'}`}>
         {(pct * 100).toFixed(1)}%
       </span>
-      <div className="w-full flex flex-col justify-end bg-[#080c18] border border-[#1e2d4a] rounded overflow-hidden" style={{ height: 180 }}>
+      <div className="w-full flex flex-col justify-end bg-[#080c18] border border-[#1e2d4a] rounded overflow-hidden h-28 sm:h-[180px]">
         <div
           className={`w-full transition-all duration-300 ${c.bar} ${active ? c.glow : ''} ${flash ? 'brightness-150' : ''}`}
-          style={{ height: `${pct * 100}%`, minHeight: active ? 4 : 0 }}
+          style={{ height: `${pct * 100}%`, minHeight: active ? 3 : 0 }}
         />
       </div>
-      <span className={`text-[10px] font-mono ${active ? 'text-[#4a6080]' : 'text-[#1e2d4a]'}`}>{count}</span>
-      {/* Two-color outcome label */}
-      <span className="text-sm font-mono font-bold">
+      <span className={`text-[9px] sm:text-[10px] font-mono ${active ? 'text-[#4a6080]' : 'text-[#1e2d4a]'}`}>{count}</span>
+      <span className="text-xs sm:text-sm font-mono font-bold">
         |<span style={{ color: active ? Q1_COLOR : '#2a3a5a' }}>{d1}</span>
         <span style={{ color: active ? Q0_COLOR : '#2a3a5a' }}>{d0}</span>⟩
       </span>
@@ -179,25 +178,23 @@ function StateReadingPanel({ gates, counts, total }) {
       {/* How to read key */}
       <div className="bg-[#080c18] border border-[#1e2d4a] rounded p-3 flex flex-col gap-2">
         <span className="text-[10px] font-mono text-[#3a5070]">Cómo leer cada resultado |XY⟩:</span>
-        <div className="flex items-center gap-4 font-mono">
-          <div className="text-xl flex items-center">
+        <div className="flex flex-wrap items-center gap-3 font-mono">
+          <div className="text-xl flex items-center flex-shrink-0">
             <span className="text-[#4a6080]">|</span>
             <span className="font-bold" style={{ color: Q1_COLOR }}>X</span>
             <span className="font-bold" style={{ color: Q0_COLOR }}>Y</span>
             <span className="text-[#4a6080]">⟩</span>
           </div>
           <div className="flex flex-col gap-1 text-[10px]">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-sm" style={{ background: Q1_COLOR, display: 'inline-block' }} />
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: Q1_COLOR, display: 'inline-block' }} />
               <span className="font-bold" style={{ color: Q1_COLOR }}>X</span>
-              <span className="text-[#3a5070]">= primer dígito → estado de</span>
-              <span className="font-bold" style={{ color: Q1_COLOR }}>q[1]</span>
+              <span className="text-[#3a5070]">primer dígito → <span className="font-bold" style={{ color: Q1_COLOR }}>q[1]</span></span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-sm" style={{ background: Q0_COLOR, display: 'inline-block' }} />
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: Q0_COLOR, display: 'inline-block' }} />
               <span className="font-bold" style={{ color: Q0_COLOR }}>Y</span>
-              <span className="text-[#3a5070]">= segundo dígito → estado de</span>
-              <span className="font-bold" style={{ color: Q0_COLOR }}>q[0]</span>
+              <span className="text-[#3a5070]">segundo dígito → <span className="font-bold" style={{ color: Q0_COLOR }}>q[0]</span></span>
             </div>
           </div>
         </div>
@@ -340,7 +337,7 @@ export default function ShotSimulator({ gates }) {
   const remaining = TOTAL - total
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6 sm:gap-8">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-white tracking-tight mb-1">Simulador de Shots</h1>
@@ -364,8 +361,8 @@ export default function ShotSimulator({ gates }) {
       ) : (
         <>
           {/* Histogram */}
-          <div className="bg-[#0d1528] border border-[#1e2d4a] rounded-lg p-6">
-            <div className="flex items-center justify-between mb-2">
+          <div className="bg-[#0d1528] border border-[#1e2d4a] rounded-lg p-4 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-1 mb-3">
               <span className="text-[10px] font-mono text-[#3a5070] uppercase tracking-widest">Histograma de resultados</span>
               <span className="text-xs font-mono text-[#4a6080]">
                 <span className={total > 0 ? 'text-white font-bold' : ''}>{total}</span>
@@ -374,21 +371,21 @@ export default function ShotSimulator({ gates }) {
             </div>
 
             {/* Qubit color key */}
-            <div className="flex items-center gap-5 mb-5 text-[10px] font-mono">
-              <span className="text-[#2a3a5a]">En cada |XY⟩:</span>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-4 text-[10px] font-mono">
+              <span className="text-[#2a3a5a]">En |XY⟩:</span>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: Q1_COLOR }} />
                 <span style={{ color: Q1_COLOR }}>X</span>
-                <span className="text-[#3a5070]">= primer dígito = q[1]</span>
+                <span className="text-[#3a5070]">= 1er dígito = q[1]</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: Q0_COLOR }} />
                 <span style={{ color: Q0_COLOR }}>Y</span>
-                <span className="text-[#3a5070]">= segundo dígito = q[0]</span>
+                <span className="text-[#3a5070]">= 2do dígito = q[0]</span>
               </div>
             </div>
 
-            <div className="flex gap-4 items-end">
+            <div className="flex gap-2 sm:gap-4 items-end">
               {OUTCOMES.map(o => (
                 <Bar key={o} label={o} count={counts[o]} total={total} animFlash={animFlash} />
               ))}
@@ -400,7 +397,7 @@ export default function ShotSimulator({ gates }) {
           </div>
 
           {/* Controls */}
-          <div className="flex gap-3 flex-wrap">
+          <div className="grid grid-cols-2 sm:flex gap-3">
             <button
               onClick={addShot}
               disabled={running || total >= TOTAL}
@@ -427,7 +424,7 @@ export default function ShotSimulator({ gates }) {
             </button>
             <button
               onClick={reset}
-              className="px-4 py-2.5 rounded border border-[#1e2d4a] text-[#3a5070] text-sm font-mono hover:border-[#2a3a5a] hover:text-[#4a6080] transition-all duration-200 cursor-pointer"
+              className="col-span-2 sm:col-span-1 px-4 py-2.5 rounded border border-[#1e2d4a] text-[#3a5070] text-sm font-mono hover:border-[#2a3a5a] hover:text-[#4a6080] transition-all duration-200 cursor-pointer"
             >
               Reset
             </button>

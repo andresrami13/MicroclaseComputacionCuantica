@@ -36,13 +36,13 @@ function Footer() {
       <p className="text-center font-mono text-xs" style={{ color: 'var(--text-dim)' }}>
         ¿Listo para el hardware real?{' '}
         <a
-          href="https://quantum.ibm.com"
+          href="https://quantum.cloud.ibm.com/composer"
           target="_blank"
           rel="noopener noreferrer"
           className="transition-colors duration-200 hover:underline"
           style={{ color: 'var(--ibm-blue)' }}
         >
-          → quantum.ibm.com
+          → IBM Quantum Composer
         </a>
       </p>
     </footer>
@@ -130,9 +130,9 @@ function Welcome({ onStart }) {
 
       <footer className="absolute bottom-5 w-full text-center font-mono text-xs" style={{ color: 'var(--text-dim)' }}>
         ¿Listo para el hardware real?{' '}
-        <a href="https://quantum.ibm.com" target="_blank" rel="noopener noreferrer"
+        <a href="https://quantum.cloud.ibm.com/composer" target="_blank" rel="noopener noreferrer"
           className="hover:underline transition-colors" style={{ color: 'var(--ibm-blue)' }}>
-          → quantum.ibm.com
+          → IBM Quantum Composer
         </a>
       </footer>
     </div>
@@ -191,7 +191,7 @@ export default function App() {
 
       {/* ── Tab bar ── */}
       <div ref={tabBarRef} className="flex-shrink-0 border-b overflow-x-auto" style={{ background: 'var(--bg-header)', borderColor: 'var(--border)', scrollbarWidth: 'none' }}>
-        <div className="max-w-5xl mx-auto px-2 sm:px-6 flex">
+        <div className="max-w-5xl mx-auto flex">
           {TABS.map(tab => {
             const isActive = active === tab.id
             return (
@@ -199,7 +199,7 @@ export default function App() {
                 key={tab.id}
                 data-active={isActive ? 'true' : 'false'}
                 onClick={() => setActive(tab.id)}
-                className="flex-shrink-0 px-3 sm:px-5 py-3 font-mono text-xs border-b-2 transition-all duration-200 cursor-pointer bg-transparent outline-none whitespace-nowrap"
+                className="flex-1 sm:flex-none sm:px-5 py-3 sm:py-3 font-mono border-b-2 transition-all duration-200 cursor-pointer bg-transparent outline-none"
                 style={{
                   borderBottomColor: isActive ? 'var(--ibm-blue)' : 'transparent',
                   color: isActive ? 'var(--ibm-blue)' : 'var(--text-muted)',
@@ -209,8 +209,13 @@ export default function App() {
                 onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = '#8ab4f8' }}
                 onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = 'var(--text-muted)' }}
               >
-                <span className="sm:hidden">{tab.short}</span>
-                <span className="hidden sm:inline">{tab.short} — {tab.label}</span>
+                {/* Mobile: short code + truncated label stacked */}
+                <div className="sm:hidden flex flex-col items-center gap-0 px-1">
+                  <span className="text-[13px] font-bold leading-tight">{tab.short}</span>
+                  <span className="text-[9px] leading-tight opacity-70 max-w-[68px] text-center truncate">{tab.label}</span>
+                </div>
+                {/* Desktop: full label */}
+                <span className="hidden sm:inline text-xs whitespace-nowrap">{tab.short} — {tab.label}</span>
               </button>
             )
           })}
