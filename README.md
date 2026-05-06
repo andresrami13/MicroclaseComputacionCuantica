@@ -19,6 +19,8 @@ IBM Quantum Composer.
 
 ## ¿Cómo usar la app?
 
+Primero entras al link https://microclase-computacion-cuantica.vercel.app/
+
 La app tiene **4 módulos** que debes recorrer en orden. Cada uno te prepara para el siguiente, y 
 todos apuntan al mismo destino: que cuando abras IBM Quantum Composer, ya sepas exactamente qué estás viendo y qué vas a hacer.
 
