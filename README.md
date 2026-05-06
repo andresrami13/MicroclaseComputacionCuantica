@@ -6,7 +6,7 @@ https://udistritaleduco-my.sharepoint.com/:p:/g/personal/anramirezv_udistrital_e
 
 https://quantum.cloud.ibm.com/composer
 
-# Link para la 🧪 App Interactiva microclase computacion cuantica
+# Link para la App Interactiva microclase computacion cuantica
 
 https://microclase-computacion-cuantica.vercel.app/
 
